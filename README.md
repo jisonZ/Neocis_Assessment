@@ -24,13 +24,13 @@ In the first section, we implement a basic visualizer that demonstrate the polyh
 
 The program first apply rotation matrix to the vertices accroding to the user input, then apply projection matrix for the purpose of 2D viewing. 
 
-![Image description](part1Princeple.PNG)
+![Image description](part1Princeple.png)
 
 ## Part 2: Polyhedron Visualizer with Shading
 
 Next, we apply shading to the surface of the polyhedron. We have modified the shading color to alternate between (0,0,255) to (0,0,37) for a more vibrant shading. The edges and vertices visualization could be remove by commenting out the `visualizeEdges()` fucntion on line 207.
 
-![Image description](part2Demo.PNG)
+![Image description](part2Demo.png)
 
 First, we figure out the order of shading the surface by ranking the z-value of the centroids of each polygon. The larger the z-value, the later its surface will be shaded since it overlaps the already shaded area. 
 
@@ -40,15 +40,15 @@ After that we acquire the shading color by calculating the normal vector of each
 
 In the final section, I've attempted a more standard method for solving the Hidden Surface problem in Computer Graphics using Z-Buffer. The algorithm essentially iterate through each polygon surface and mark the z-value(depth) of each pixel on the surface to a buffer. A pesudo-code is shown below.
 
-![Image description](part3zbuffer.PNG)
+![Image description](part3zbuffer.png)
 
 At the same time, we could apply a trick to accelerate writing to the buffer called z-value interpolation. The trick apply a scan line for each y-value of the surface and interpolate the z values across. 
 
-![Image description](part3zbuffer2.PNG)
+![Image description](part3zbuffer2.png)
 
 After implementing and debuging the program, I found that the method is too slow for pygame rendering, since we iterate all polygons pixels. As a result, the visualization stuck upon any user actions. The following is a demonstration of the initial partial rendering:
 
-![Image description](part3Demo.PNG)
+![Image description](part3Demo.png)
 
 ## Resources
 https://cglearn.codelight.eu/pub/computer-graphics/shading-and-lighting
