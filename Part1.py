@@ -1,23 +1,21 @@
-# Simple pygame program
-
 # Import and initialize the pygame library
 import pygame
 import argparse
 import numpy as np
 from math import *
 
+# color 
 WHITE = (255, 255, 255)
 RED = (255, 0, 0)
 BLACK = (0, 0, 0)
 ROTATE_SPEED = 0.02
 
+# screen parameters
 scale = 100
 origin = [250, 250]
 senstivity = 0.02
 
 def runVisualizer(VertDic, SurfList):
-    # Set parameters
-
     ProjMatrix = np.matrix([
         [1, 0 ,0],
         [0, 1, 0]
@@ -52,9 +50,8 @@ def runVisualizer(VertDic, SurfList):
                         initRotating = True
                     else:
                         yAngle = -rel[0]*senstivity
-                        xAngle = rel[1]*senstivity
+                        xAngle = -rel[1]*senstivity
                     
-            # if event.type == pygame.KEYDOWN:
             # if a key is pressed for rotation
             keys = pygame.key.get_pressed()
             if keys[pygame.K_r]:
@@ -104,16 +101,23 @@ def runVisualizer(VertDic, SurfList):
 
             projected2d = np.dot(ProjMatrix, rotated2d)
             x = int(projected2d[0][0] * scale) + origin[0]
-            y = int(projected2d[1][0] * scale) + origin[1]
-            pygame.draw.circle(screen, RED, (x, y), 5)
-
+            y = int(-projected2d[1][0] * scale) + origin[1]
+            pygame.draw.circle(screen, RED, (x, y), 5)            
             projDic[key] = [x, y]
+        # break
 
-        # update connected lines
+        # update connected lines wo overlapping
+        connected = set()
         for surf in SurfList:
             for v in range(len(surf)):
-                pygame.draw.line(screen, BLACK, projDic[surf[v]], projDic[surf[(v+1)%len(surf)]])
+                if (surf[v], surf[(v+1)%len(surf)]) not in connected:
+                    pygame.draw.line(screen, BLACK, projDic[surf[v]], projDic[surf[(v+1)%len(surf)]])
+                    connected.add((surf[v], surf[(v+1)%len(surf)]))
 
+        # Draw Origin
+        pygame.draw.circle(screen, BLACK, (250, 250), 5)
+
+        # Update screen
         pygame.display.update()
 
 if __name__ == '__main__':
@@ -130,7 +134,7 @@ if __name__ == '__main__':
         SurfList = []
         for i in range(numVert):
             line = f.readline().split(',')
-            VertDic[int(line[0])] = np.matrix([[float(line[1])], [float(line[2])], [float(line[3])]])
+            VertDic[int(line[0])] = np.matrix([[float(line[1])], [float(line[2])], [-float(line[3])]])
         
         for j in range(numSurf):
             line = f.readline().split(',')

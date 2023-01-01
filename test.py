@@ -1,67 +1,29 @@
+# Simple pygame program
+
+# Import and initialize the pygame library
 import pygame
-
-# --- constants --- (UPPER_CASE names)
-
-SCREEN_WIDTH = 430
-SCREEN_HEIGHT = 410
-WHITE = (255, 255, 255)
-RED   = (255,   0,   0)
-FPS = 30
-
-# --- main ---
-
-# - init -
-
 pygame.init()
-screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
-# - objects -
+# Set up the drawing window
+screen = pygame.display.set_mode([500, 500])
 
-rectangle = pygame.rect.Rect(176, 134, 30, 30)
-rectangle_draging = False
-
-# - mainloop -
-
-clock = pygame.time.Clock()
-
+# Run until the user asks to quit
 running = True
-
 while running:
 
-    # - events -
-
+    # Did the user click the window close button?
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
 
-        elif event.type == pygame.MOUSEBUTTONDOWN:
-            if event.button == 1:            
-                if rectangle.collidepoint(event.pos):
-                    rectangle_draging = True
-                    mouse_x, mouse_y = event.pos
-                    offset_x = rectangle.x - mouse_x
-                    offset_y = rectangle.y - mouse_y
+    # Fill the background with white
+    screen.fill((255, 255, 255))
 
-        elif event.type == pygame.MOUSEBUTTONUP:
-            if event.button == 1:            
-                rectangle_draging = False
-
-        elif event.type == pygame.MOUSEMOTION:
-            if rectangle_draging:
-                mouse_x, mouse_y = event.pos
-                rectangle.x = mouse_x + offset_x
-                rectangle.y = mouse_y + offset_y
-
-    # - draws (without updates) -
-
-    screen.fill(WHITE)
-    pygame.draw.rect(screen, RED, rectangle)
+    # Draw a solid blue circle in the center
+    pygame.draw.circle(screen, (0, 255, 0), (250, 250), 50)
+    pygame.draw.circle(screen, (0, 0, 255), (250, 250), 75)
+    # Flip the display
     pygame.display.flip()
 
-    # - constant game speed / FPS -
-
-    clock.tick(FPS)
-
-# - end -
-
+# Done! Time to quit.
 pygame.quit()
