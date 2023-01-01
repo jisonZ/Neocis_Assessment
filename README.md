@@ -50,3 +50,10 @@ After implementing and debuging the program, I found that the method is too slow
 
 ![Image description](part3Demo.PNG)
 
+## Resources
+https://cglearn.codelight.eu/pub/computer-graphics/shading-and-lighting
+https://courses.cs.washington.edu/courses/cse557/00wi/lectures/hidden-surface.pdf
+http://courses.washington.edu/arch481/1.Tapestry%20Reader/4.Rendering/2.Hidden%20Lines/1.Culling.html
+https://www.cs.ubc.ca/~tmm/courses/cpsc414-03-fall/Vsep2003/slides/week10.mon.slides.pdf
+https://github.com/yuta-51/3DProjection
+
