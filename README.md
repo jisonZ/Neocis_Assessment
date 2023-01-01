@@ -20,7 +20,7 @@ python3 Part1.py object.txt
 
 In the first section, we implement a basic visualizer that demonstrate the polyhedron's edge and vertices. The user is able to either drag the polyhedron using a mouse to rotate it, or do minor rotation adjustment using the 'q','w','e','a','s','d' keys. The black dot represent the origin of the coordinate system.
 
-![Image description](part1Demo.PNG)
+![Image description](part1Demo.png)
 
 The program first apply rotation matrix to the vertices accroding to the user input, then apply projection matrix for the purpose of 2D viewing. 
 
